@@ -44,8 +44,8 @@ public class MyAdapter extends BaseAdapter {
         LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.status_row, parent, false);
-        TextView tv = (TextView)rowView.findViewById(R.id.textView2);
-        TextView tvDate = (TextView)rowView.findViewById(R.id.textView3);
+        TextView tv = (TextView)rowView.findViewById(R.id.status);
+        TextView tvDate = (TextView)rowView.findViewById(R.id.statusDate);
         tv.setText(mStatuses.get(position).getStatus());
         tvDate.setText(mStatuses.get(position).getDate());
         return rowView;
