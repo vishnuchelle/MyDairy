@@ -23,6 +23,10 @@ public class MySqliteHelper extends SQLiteOpenHelper {
 
     private static final String STATUS_TABLE = "status";
 
+    private static final String LOCATION_TABLE = "user_location";
+
+    private static final String USER_GROUPS = "user_groups";
+
     public MySqliteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -49,11 +53,21 @@ public class MySqliteHelper extends SQLiteOpenHelper {
                 "date TEXT, "+
                 "status TEXT )";
 
+        String CREATE_LOCATION_TABLE = "CREATE TABLE " +
+                LOCATION_TABLE+
+                "( " +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                "user_name TEXT, "+
+                "date TEXT, "+
+                "latitude REAL," +
+                "longitude REAL" +
+                "formattedLocation TEXT)";
 
-        // create both the tables
+
+        // create the tables
         db.execSQL(CREATE_USER_TABLE);
-
         db.execSQL(CREATE_STATUS_TABLE);
+//        db.execSQL(CREATE_LOCATION_TABLE);
     }
 
     @Override
@@ -63,6 +77,8 @@ public class MySqliteHelper extends SQLiteOpenHelper {
                 USER_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " +
                 STATUS_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " +
+                LOCATION_TABLE);
 
         // create fresh table
         this.onCreate(db);
@@ -207,8 +223,5 @@ public class MySqliteHelper extends SQLiteOpenHelper {
         return person;
 
     }
-
-
-
 
 }
