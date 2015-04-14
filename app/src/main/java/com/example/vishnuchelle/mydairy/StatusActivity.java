@@ -3,6 +3,7 @@ package com.example.vishnuchelle.mydairy;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -17,7 +18,7 @@ import java.util.Calendar;
 /**
  * Created by VishnuChelle on 3/18/2015.
  */
-public class StatusActivity extends Activity {
+public class StatusActivity extends ActionBarActivity {
 
     private String mUserName;
     private EditText mStatus;

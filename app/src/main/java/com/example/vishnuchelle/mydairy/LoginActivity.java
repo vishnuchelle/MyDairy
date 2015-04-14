@@ -3,6 +3,7 @@ package com.example.vishnuchelle.mydairy;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,7 +12,7 @@ import android.widget.Toast;
 /**
  * Created by Vishnu Chelle on 3/18/2015.
  */
-public class LoginActivity extends Activity implements View.OnClickListener{
+public class LoginActivity extends ActionBarActivity implements View.OnClickListener{
 
     private EditText userName;
     private EditText password;
