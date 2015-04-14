@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources  layout_width="" layout_height="">
 
-    <color name="bluee">#60CEFD</color>
+    <color name="light_blue">#60CEFD</color>
     <color name="blue">#00f</color>
     <color name="red">#f00</color>
     <color name="grey">#999966</color>
+    <color name="cream">#5fa1a1a1</color>
 </resources>

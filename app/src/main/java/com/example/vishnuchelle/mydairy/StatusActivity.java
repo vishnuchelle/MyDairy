@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -31,7 +32,7 @@ public class StatusActivity extends ActionBarActivity {
         setContentView(R.layout.activity_status);
 
         mStatus = (EditText)findViewById(R.id.status);
-        mUpdate = (Button)findViewById(R.id.update);
+        mUpdate = (Button)findViewById(R.id.makeUpdate);
         list = (ListView)findViewById(R.id.listView);
 
         Intent intent = getIntent();
@@ -49,14 +50,15 @@ public class StatusActivity extends ActionBarActivity {
                 String date = format.format(calendar.getTime());
                 String userName = mUserName;
                 String status = mStatus.getText()+"";
-                statusObj.setUserName(mUserName);
-                statusObj.setDate(date);
-                statusObj.setStatus(status);
-
-
-                db.addStatus(statusObj);
-
-                updateList();
+                if (!status.equals("")){
+                    statusObj.setUserName(mUserName);
+                    statusObj.setDate(date);
+                    statusObj.setStatus(status);
+                    db.addStatus(statusObj);
+                    updateList();
+                }else{
+                    Toast.makeText(StatusActivity.this, "Please provide an update!", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
