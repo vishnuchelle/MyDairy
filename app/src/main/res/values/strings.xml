@@ -3,4 +3,6 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_createGroup">Create Group</string>
+    <string name="drawer_open">Groups</string>
+    <string name="drawer_close">Close</string>
 </resources>
