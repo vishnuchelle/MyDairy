@@ -109,6 +109,7 @@ public class StatusActivity extends ActionBarActivity {
         //CheckInternetConnectivity
         if(checkInternetConnection()){
             //TODO need to call async task
+
             GetGroupsList getGroupsList = new GetGroupsList(new GetGroupsList.IGroupsCallBack() {
                 @Override
                 public void onGroupsReceived(String groupList) {
@@ -122,6 +123,9 @@ public class StatusActivity extends ActionBarActivity {
             });
             getGroupsList.execute(mUserName);
         }
+//        else{
+//            Toast.makeText(StatusActivity.this,"Please check Internet connectivity...",Toast.LENGTH_SHORT).show();
+//        }
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -183,16 +187,17 @@ public class StatusActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(position == 0){
-
                     //TODO create new group
 
                     Toast.makeText(StatusActivity.this, "Show dialog to create group", Toast.LENGTH_SHORT).show();
+
+
+
                 }else{
 
                     //TODO start Activity with group name and user name
                     Toast.makeText(StatusActivity.this, "call new activity with group name and user name", Toast.LENGTH_SHORT).show();
                 }
-
 
             }
         });
@@ -266,7 +271,12 @@ public class StatusActivity extends ActionBarActivity {
 
         // Activate the navigation drawer toggle
         if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
+            if(checkInternetConnection()){
+                return true;
+            }else{
+                Toast.makeText(StatusActivity.this,"Please check Internet connectivity...",Toast.LENGTH_SHORT).show();
+            }
+
         }
 
         return super.onOptionsItemSelected(item);
