@@ -18,6 +18,8 @@ public class DistanceCalcReceiver extends BroadcastReceiver {
 //        Log.i("Alarm Receiver", "Entered");
 //        Toast.makeText(context, "Entered the OnReciever", Toast.LENGTH_SHORT).show();
 
+        //TODO calculate distance for whole day
+
         //Execute the DictanceCalculator AsyncTask
         DistanceCalculator distanceCalculator = new DistanceCalculator();
         //Pass origin and destination latitude and longitude

@@ -116,7 +116,7 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
         try {
             AlarmManager alarm2 = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
 
-            Intent intent2 = new Intent(getApplicationContext(), DistanceCalculator.class);
+            Intent intent2 = new Intent(getApplicationContext(), DistanceCalcReceiver.class);
             //intent.putExtra(AlarmReceiver.ACTION_ALARM, AlarmReceiver.ACTION_ALARM);
 
             final PendingIntent pIntent2 = PendingIntent.getBroadcast(this, 0, intent2, 0);
@@ -135,7 +135,7 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
                 calendar.set(Calendar.HOUR_OF_DAY, 1);
             }
 
-            alarm2.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY , pIntent2);
+            alarm2.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pIntent2);
 //            Toast.makeText(this,"Started...",Toast.LENGTH_SHORT).show();
 
         } catch (Exception e) {

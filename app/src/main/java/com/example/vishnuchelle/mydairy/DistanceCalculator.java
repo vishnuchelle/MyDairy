@@ -90,7 +90,6 @@ public class DistanceCalculator extends AsyncTask<String,Void,String> {
     @Override
     protected String doInBackground(String... latLongParams) {
 
-
         String distanceResp = getDistance(latLongParams[0], latLongParams[1], latLongParams[2], latLongParams[3]);
         if (distanceResp != null){
             return distanceResp;
