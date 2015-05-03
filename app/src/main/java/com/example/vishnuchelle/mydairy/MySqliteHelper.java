@@ -60,10 +60,10 @@ public class MySqliteHelper extends SQLiteOpenHelper {
                 "( " +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, "+
                 "user_name TEXT, "+
-                "time_stamp TEXT, "+
+                "time_stamp INTEGER, "+
                 "date TEXT, " +
                 "latitude TEXT," +
-                "longitude TEXT" +
+                "longitude TEXT," +
                 "formattedLocation TEXT)";
 
         String CREATE_DISTANCE_TABLE = "CREATE TABLE " +
@@ -72,6 +72,7 @@ public class MySqliteHelper extends SQLiteOpenHelper {
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, "+
                 "user_name TEXT, "+
                 "date TEXT, "+
+                "time_stamp INTEGER,"+
                 "distanceTravelled TEXT)";
 
 
@@ -79,8 +80,8 @@ public class MySqliteHelper extends SQLiteOpenHelper {
         // create the tables
         db.execSQL(CREATE_USER_TABLE);
         db.execSQL(CREATE_STATUS_TABLE);
-//        db.execSQL(CREATE_LOCATION_TABLE);
-//        db.execSQL(CREATE_DISTANCE_TABLE);
+        db.execSQL(CREATE_LOCATION_TABLE);
+        db.execSQL(CREATE_DISTANCE_TABLE);
     }
 
     @Override
@@ -129,7 +130,7 @@ public class MySqliteHelper extends SQLiteOpenHelper {
     private static final String[] DISTANCE_COLUMNS = {KEY_USER_NAME,KEY_DATE,KEY_DIST_TRAVELLED};
 
     private static final String[] LOCATION_COLUMNS = {KEY_USER_NAME,KEY_DATE,KEY_TIME_STAMP,KEY_LATITUDE,
-            KEY_LONGITUDE,KEY_FORMAT_LOCATION};
+            KEY_LONGITUDE,KEY_FORMAT_LOCATION};//,
 
     public ArrayList<Status> getStatues(String userName){
 
@@ -248,6 +249,17 @@ public class MySqliteHelper extends SQLiteOpenHelper {
 
     }
 
+    /**
+     * LocationDetails contains
+     * locationDetails[0] - timestamp long in String
+     * locationDetails[1] - date in string
+     * locationDetails[2] - latitude
+     * locationDetails[3] - logitude
+     * locationDetails[4] - location address
+     * locationDetails[5] - last username
+     *
+     * @param locationDetails
+     */
     //Insert into location table
     public void addLocation(String[] locationDetails){
 
@@ -256,7 +268,7 @@ public class MySqliteHelper extends SQLiteOpenHelper {
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
         values.put(KEY_USER_NAME, locationDetails[5]); // get username
-        values.put(KEY_TIME_STAMP, locationDetails[0]); // get timestamp array index 0
+        values.put(KEY_TIME_STAMP, Long.parseLong(locationDetails[0])); // get timestamp array index 0
         values.put(KEY_DATE, locationDetails[1]);
         values.put(KEY_LATITUDE, locationDetails[2]);
         values.put(KEY_LONGITUDE, locationDetails[3]);
@@ -315,34 +327,101 @@ public class MySqliteHelper extends SQLiteOpenHelper {
         return locationList;
     }
 
+    //Retrieve Location details for specific user and date
+    public ArrayList<Location> getLocations(String userName){
+
+        // 1. get reference to readable DB
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // 2. build query
+        Cursor cursor =
+                db.query(LOCATION_TABLE, // a. table
+                        LOCATION_COLUMNS, // b. column names
+                        " user_name = ? ", // c. selections
+                        new String[] {userName}, // d. selections args
+                        null, // e. group by
+                        null, // f. having
+                        null, // g. order by
+                        null); // h. limit
+
+        // 3. if we got results get the first one
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        ArrayList<Location> locationList = new ArrayList<>();
+        if (cursor.moveToFirst()) {
+            do {
+                // do what you need with the cursor here
+
+//                KEY_USER_NAME,KEY_DATE,KEY_TIME_STAMP,KEY_LATITUDE,
+//                        KEY_LONGITUDE,KEY_FORMAT_LOCATION
+                Location location = new Location();
+                location.setUserName(cursor.getString(0));
+                location.setDate(cursor.getString(1));
+                location.setTimeStamp(cursor.getString(2));
+                location.setLatitude(cursor.getString(3));
+                location.setLongitude(cursor.getString(4));
+                location.setFormattedLocation(cursor.getString(5));
+
+                locationList.add(location);
+            } while (cursor.moveToNext());
+        }
+        // 5. return StatusList
+        return locationList;
+    }
+
     //Retrieve distance travelled details for specific user and range of dates
 
     //FIXME Yet to be completed code 05/01
     //TODO start here with building cursor
 
-    public ArrayList<Distance> getDistanceTravelled(String userName, String date){
+    public ArrayList<Distance> getDistanceTravelled(String userName, long startTimestamp, long endTimestamp){
         // 1. get reference to readable DB
         SQLiteDatabase db = this.getReadableDatabase();
 
         // 2. build query
 
-        // 3. if we got results get the first one
+        Cursor cursor =  // 2. build query
+                        db.query(DISTANCE_TABLE, // a. table
+                        DISTANCE_COLUMNS, // b. column names
+                        " user_name = ? AND time_stamp >= ? AND time_stamp <= ?", // c. selections
+                        new String[] {userName,startTimestamp+"",endTimestamp+""}, // d. selections args
+                        null, // e. group by
+                        null, // f. having
+                        null, // g. order by
+                        null); // h. limit
 
-        return null;
+        // 3. if we got results get the first one
+        ArrayList<Distance> distanceList = new ArrayList<>();
+        if (cursor.moveToFirst()) {
+            do {
+                Distance distance = new Distance(cursor.getString(0),cursor.getString(1),cursor.getString(2));
+                distanceList.add(distance);
+
+            }while (cursor.moveToNext());
+        }
+        return distanceList;
     }
 
 
-
-
+    /**
+     * distanceDetails[0] date
+     * distanceDetails[1] distance travelled
+     * distanceDetails[2] username
+     * distanceDetails[3] timestamp
+     * @param distanceDetails
+     */
     //Insert into Distance travelling table
     public void addDistance(String[] distanceDetails){
 
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
+
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
         values.put(KEY_USER_NAME, distanceDetails[2]); // get username
-        values.put(KEY_DATE, distanceDetails[0]); // get timestamp array index 0
+        values.put(KEY_DATE, distanceDetails[0]); // get date array index 0
+        values.put(KEY_TIME_STAMP,Long.parseLong(distanceDetails[3])); //timestamp
         values.put(KEY_DIST_TRAVELLED,distanceDetails[1]);
 
         // 3. insert

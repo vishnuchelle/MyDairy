@@ -3,9 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".StatusActivity">
 
+
     <item
-        android:id="@+id/action_createGroup"
-        android:title="@string/action_createGroup"
+        android:id="@+id/action_location_history"
+        android:title="@string/action_location_history"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_dist_graph"
+        android:title="@string/action_dist_graph"
         android:orderInCategory="100"
         app:showAsAction="never" />
 </menu>

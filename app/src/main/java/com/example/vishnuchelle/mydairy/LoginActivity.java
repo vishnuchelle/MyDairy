@@ -48,6 +48,7 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
                     Person person = db.getPerson(userName.getText()+"");
                     if(person!=null){
                         if((person.getPin()+"").equals(password.getText()+"")){
+                            AppSharedPreference.getInstance().updateCurrentUser(this,person.getUserName());
                             Intent intent = new Intent(LoginActivity.this,StatusActivity.class);
                             intent.putExtra("userName",person.getUserName());
                             startActivity(intent);

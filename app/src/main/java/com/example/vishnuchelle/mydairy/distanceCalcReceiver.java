@@ -20,6 +20,7 @@ public class DistanceCalcReceiver extends BroadcastReceiver {
 
         //TODO calculate distance for whole day
 
+
         //Execute the DictanceCalculator AsyncTask
         DistanceCalculator distanceCalculator = new DistanceCalculator();
         //Pass origin and destination latitude and longitude

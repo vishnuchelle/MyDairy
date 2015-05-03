@@ -262,10 +262,10 @@ public class StatusActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_createGroup) {
 
-            //create an dialog for group
-
+         if(id == R.id.action_location_history){
+            //TODO
+            openLocationHistory();
             return true;
         }
 
@@ -281,6 +281,13 @@ public class StatusActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    private void openLocationHistory() {
+        Intent locationHistoryIntent = new Intent(StatusActivity.this,LocationHistoryActivity.class);
+        startActivity(locationHistoryIntent);
+//        finish();
+    }
+
 
 
 }
