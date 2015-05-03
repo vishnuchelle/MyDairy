@@ -1,6 +1,8 @@
 package com.example.vishnuchelle.mydairy;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
@@ -9,6 +11,8 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -45,6 +49,7 @@ public class StatusActivity extends ActionBarActivity {
     private ArrayAdapter<String> mAdapter;
     private ActionBarDrawerToggle mDrawerToggle;
     private String mActivityTitle;
+    final Context mContext = this;
 
 
     private  MySqliteHelper db;
@@ -163,7 +168,7 @@ public class StatusActivity extends ActionBarActivity {
 
         ArrayList<Status> statuses = db.getStatues(mUserName);
         //show the elements in statuses in the listView
-        MyAdapter adapter = new MyAdapter(StatusActivity.this,statuses);
+        StatusAdapter adapter = new StatusAdapter(StatusActivity.this,statuses);
         list.setAdapter(adapter);
 
     }
@@ -179,8 +184,8 @@ public class StatusActivity extends ActionBarActivity {
                 groupList.add(groupsList.getJSONObject(i).getString("groupName"));
             }
 
-        String[] osArray = groupList.toArray(new String[groupList.size()]);
-        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
+        final String[] groupArray = groupList.toArray(new String[groupList.size()]);
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, groupArray);
         mDrawerList.setAdapter(mAdapter);
 
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -189,14 +194,59 @@ public class StatusActivity extends ActionBarActivity {
                 if(position == 0){
                     //TODO create new group
 
-                    Toast.makeText(StatusActivity.this, "Show dialog to create group", Toast.LENGTH_SHORT).show();
+                    // get create_new_group.xml view
+                    LayoutInflater li = LayoutInflater.from(mContext);
+                    View createGroupView = li.inflate(R.layout.create_new_group, null);
+
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
+
+                    // set create_new_group.xml to alertdialog builder
+                    alertDialogBuilder.setView(createGroupView);
+
+                    final EditText dialogInput = (EditText) createGroupView.findViewById(R.id.groupName);
+
+                    // set dialog message
+                    alertDialogBuilder
+                            .setCancelable(false)
+                            .setPositiveButton("Create",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog,int id) {
+                                            // get user input
+                                            // edit text
+                                            String groupName = dialogInput.getText()+"";
+
+                                            PostNewGroup ng = new PostNewGroup();
+                                            ng.execute(groupName, AppSharedPreference.getCurrentUser(StatusActivity.this));
+
+                                            Log.i("Entered Group Name",groupName);
+                                        }
+                                    })
+                            .setNegativeButton("Cancel",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                        }
+                                    });
+                    // create alert dialog
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+
+                    // show it
+                    alertDialog.show();
+
+//                    Toast.makeText(StatusActivity.this, "Show dialog to create group", Toast.LENGTH_SHORT).show();
 
 
 
                 }else{
 
                     //TODO start Activity with group name and user name
-                    Toast.makeText(StatusActivity.this, "call new activity with group name and user name", Toast.LENGTH_SHORT).show();
+                    String groupName = groupArray[position];
+
+                    Intent i = new Intent(StatusActivity.this,GroupStatusActivity.class);
+                    i.putExtra("groupName",groupName);
+                    StatusActivity.this.startActivity(i);
+
+//                    Toast.makeText(StatusActivity.this, "call new activity with group name and user name", Toast.LENGTH_SHORT).show();
                 }
 
             }

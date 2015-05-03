@@ -206,17 +206,142 @@ public class LocationHistoryActivity extends Activity {
         locationDetails[4] = "4057 Pennsylvania Ave Kansas City, MO"; //address
         locationDetails[5] = AppSharedPreference.getCurrentUser(this);
         dbHelper.addLocation(locationDetails);
-//***********************
+
         //23:58
         locationDetails[0] = "1430456295000";
         locationDetails[1] = "4/30/2015";
-        locationDetails[2] = "39.028226";
-        locationDetails[3] = "-94.577801";
-        locationDetails[4] = "706 E 54 Terrace Kansas City, MO"; //address
+        locationDetails[2] = "39.029504";
+        locationDetails[3] = "-94.575145";
+        locationDetails[4] = "5336 harrison street, kansas city, MO"; //address
+        locationDetails[5] = AppSharedPreference.getCurrentUser(this);
+        dbHelper.addLocation(locationDetails);
+
+        //6:00
+        locationDetails[0] = "1430478078000"; //TIme stamp
+        locationDetails[1] = "5/1/2015"; //Date
+        locationDetails[2] = "39.029504";
+        locationDetails[3] = "-94.575145";
+        locationDetails[4] = "5336 harrison street, kansas city, MO"; //address
+        locationDetails[5] = AppSharedPreference.getCurrentUser(this);
+        dbHelper.addLocation(locationDetails);
+
+        //12:00
+        locationDetails[0] = "1430499678000"; //TIme stamp
+        locationDetails[1] = "5/1/2015"; //Date
+        locationDetails[2] = "39.033743"; //Latitude
+        locationDetails[3] = "-94.576425"; //Longitude
+        locationDetails[4] = "Flarsheim Hall University of Missouri-Kansas City, Volker Campus Kansas City, MO"; //Formatted address
+        locationDetails[5] = AppSharedPreference.getCurrentUser(this);
+        dbHelper.addLocation(locationDetails);
+
+        //18:00
+        locationDetails[0] = "1430521278000";
+        locationDetails[1] = "5/1/2015";
+        locationDetails[2] = "39.035014";
+        locationDetails[3] = "-94.576526";
+        locationDetails[4] = "800 E 51st St Kansas City, MO"; //address
+        locationDetails[5] = AppSharedPreference.getCurrentUser(this);
+        dbHelper.addLocation(locationDetails);
+
+        //23:58
+        locationDetails[0] = "1430542698000";
+        locationDetails[1] = "5/1/2015";
+        locationDetails[2] = "39.028059";
+        locationDetails[3] = "-94.577291";
+        locationDetails[4] = "5426 Charlotte Street, Kansas City, MO"; //address
+        locationDetails[5] = AppSharedPreference.getCurrentUser(this);
+        dbHelper.addLocation(locationDetails);
+
+        //6:00
+        locationDetails[0] = "1430564438000"; //TIme stamp
+        locationDetails[1] = "5/2/2015"; //Date
+        locationDetails[2] = "39.028059";
+        locationDetails[3] = "-94.577291";
+        locationDetails[4] = "5426 Charlotte Street, Kansas City, MO"; //address
+        locationDetails[5] = AppSharedPreference.getCurrentUser(this);
+        dbHelper.addLocation(locationDetails);
+
+        //12:00
+        locationDetails[0] = "1430586038000"; //TIme stamp
+        locationDetails[1] = "5/2/2015"; //Date
+        locationDetails[2] = "39.034549"; //Latitude
+        locationDetails[3] = "-94.580980"; //Longitude
+        locationDetails[4] = "5100 Cherry St Kansas City, MO"; //Formatted address
+        locationDetails[5] = AppSharedPreference.getCurrentUser(this);
+        dbHelper.addLocation(locationDetails);
+
+        //18:00
+        locationDetails[0] = "1430607638000";
+        locationDetails[1] = "5/2/2015";
+        locationDetails[2] = "39.248277";
+        locationDetails[3] = "-94.661096";
+        locationDetails[4] = "8441 NW Prairie View Road Zona Rosa Kansas City, MO"; //address
+        locationDetails[5] = AppSharedPreference.getCurrentUser(this);
+        dbHelper.addLocation(locationDetails);
+
+        //23:58
+        locationDetails[0] = "1430629118000";
+        locationDetails[1] = "5/2/2015";
+        locationDetails[2] = "39.150206";
+        locationDetails[3] = "-94.483240";
+        locationDetails[4] = "3200 North Ameristar Drive Kansas City, MO"; //address
         locationDetails[5] = AppSharedPreference.getCurrentUser(this);
         dbHelper.addLocation(locationDetails);
 
 
+        //6:00
+        locationDetails[0] = "1430650863000"; //TIme stamp
+        locationDetails[1] = "5/3/2015"; //Date
+        locationDetails[2] = "39.029504";
+        locationDetails[3] = "-94.575145";
+        locationDetails[4] = "5336 harrison street, kansas city, MO"; //address
+        locationDetails[5] = AppSharedPreference.getCurrentUser(this);
+        dbHelper.addLocation(locationDetails);
+
+        //12:00
+        locationDetails[0] = "1430672463000"; //TIme stamp
+        locationDetails[1] = "5/3/2015"; //Date
+        locationDetails[2] = "38.970642"; //Latitude
+        locationDetails[3] = "-94.695059"; //Longitude
+        locationDetails[4] = "Louisburg Square 9359 W 87th St Overland Park, KS"; //Formatted address
+        locationDetails[5] = AppSharedPreference.getCurrentUser(this);
+        dbHelper.addLocation(locationDetails);
+
+        //18:00
+        locationDetails[0] = "1430694063000";
+        locationDetails[1] = "5/3/2015";
+        locationDetails[2] = "39.021444";
+        locationDetails[3] = "-94.646741";
+        locationDetails[4] = "5399 Martway St Mission, KS"; //address
+        locationDetails[5] = AppSharedPreference.getCurrentUser(this);
+        dbHelper.addLocation(locationDetails);
+
+        //23:58
+        locationDetails[0] = "1430715543000";
+        locationDetails[1] = "5/3/2015";
+        locationDetails[2] = "38.970511";
+        locationDetails[3] = "-94.607305";
+        locationDetails[4] = "8600 Ward Parkway Ste 14 Ward Parkway Center Kansas City, MO"; //address
+        locationDetails[5] = AppSharedPreference.getCurrentUser(this);
+        dbHelper.addLocation(locationDetails);
+
+        //6:00
+        locationDetails[0] = "1430737263000"; //TIme stamp
+        locationDetails[1] = "5/4/2015"; //Date
+        locationDetails[2] = "39.029504";
+        locationDetails[3] = "-94.575145";
+        locationDetails[4] = "5336 harrison street, kansas city, MO"; //address
+        locationDetails[5] = AppSharedPreference.getCurrentUser(this);
+        dbHelper.addLocation(locationDetails);
+
+        //12:00
+        locationDetails[0] = "1430758863000"; //TIme stamp
+        locationDetails[1] = "5/4/2015"; //Date
+        locationDetails[2] = "39.0350142"; //Latitude
+        locationDetails[3] = "-94.576526"; //Longitude
+        locationDetails[4] = "University of Missouri-Kansas City, Volker Campus 800 E 51st St Kansas City, MO"; //Formatted address
+        locationDetails[5] = AppSharedPreference.getCurrentUser(this);
+        dbHelper.addLocation(locationDetails);
 
     }
 
@@ -229,16 +354,57 @@ public class LocationHistoryActivity extends Activity {
 
         //From here
         distanceDetails[0] = "4/26/2015";
-        distanceDetails[1] = "54"; //Distance Travelled
+        distanceDetails[1] = "30"; //Distance Travelled
         distanceDetails[2] = AppSharedPreference.getCurrentUser(this);
-        distanceDetails[3] = "1430046004000"; // Every day time stamp 1AM
+        distanceDetails[3] = "1430028003000"; // Every day time stamp 1AM
         dbHelper.addDistance(distanceDetails);
 
-        //
-        distanceDetails[0] = "4/26/2015";
+        distanceDetails[0] = "4/27/2015";
+        distanceDetails[1] = "12";
+        distanceDetails[2] = AppSharedPreference.getCurrentUser(this);
+        distanceDetails[3] = "1430114463000";
+        dbHelper.addDistance(distanceDetails);
+
+        distanceDetails[0] = "4/28/2015";
+        distanceDetails[1] = "18";
+        distanceDetails[2] = AppSharedPreference.getCurrentUser(this);
+        distanceDetails[3] = "1430200868000";
+        dbHelper.addDistance(distanceDetails);
+
+        distanceDetails[0] = "4/29/2015";
+        distanceDetails[1] = "15";
+        distanceDetails[2] = AppSharedPreference.getCurrentUser(this);
+        distanceDetails[3] = "1430287209000";
+        dbHelper.addDistance(distanceDetails);
+
+        distanceDetails[0] = "4/30/2015";
+        distanceDetails[1] = "40";
+        distanceDetails[2] = AppSharedPreference.getCurrentUser(this);
+        distanceDetails[3] = "1430373665000";
+        dbHelper.addDistance(distanceDetails);
+
+        distanceDetails[0] = "5/1/2015";
+        distanceDetails[1] = "19";
+        distanceDetails[2] = AppSharedPreference.getCurrentUser(this);
+        distanceDetails[3] = "1430460064000";
+        dbHelper.addDistance(distanceDetails);
+
+        distanceDetails[0] = "5/2/2015";
+        distanceDetails[1] = "33";
+        distanceDetails[2] = AppSharedPreference.getCurrentUser(this);
+        distanceDetails[3] = "1430546430000";
+        dbHelper.addDistance(distanceDetails);
+
+        distanceDetails[0] = "5/3/2015";
         distanceDetails[1] = "54";
         distanceDetails[2] = AppSharedPreference.getCurrentUser(this);
-        distanceDetails[3] = "1430046004000";
+        distanceDetails[3] = "1430632875000";
+        dbHelper.addDistance(distanceDetails);
+
+        distanceDetails[0] = "5/4/2015";
+        distanceDetails[1] = "74";
+        distanceDetails[2] = AppSharedPreference.getCurrentUser(this);
+        distanceDetails[3] = "1430719278000";
         dbHelper.addDistance(distanceDetails);
 
     }

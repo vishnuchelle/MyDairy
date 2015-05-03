@@ -7,31 +7,31 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Collections;
 
 /**
- * Created by Vishnu Chelle on 5/2/2015.
+ * Created by Vishnu Chelle on 3/18/2015.
  */
-public class LocationAdapter extends BaseAdapter {
+public class StatusAdapter extends BaseAdapter {
 
     private Context mContext;
-    private ArrayList<Location> mLocations;
+    private ArrayList<Status> mStatuses;
 
-    public LocationAdapter(Context context, ArrayList<Location> locations){
-        this.mContext = context;
-        this.mLocations = locations;
+    public StatusAdapter(Context mContext, ArrayList<Status> statuses){
+        this.mContext = mContext;
+        this.mStatuses = statuses;
+
     }
 
     @Override
     public int getCount() {
-        return mLocations.size();
+        return mStatuses.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mLocations.get(position);
+        return mStatuses.get(mStatuses.size() - position -1 );
     }
 
     @Override
@@ -41,17 +41,14 @@ public class LocationAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.status_row, parent, false);
         TextView tv = (TextView)rowView.findViewById(R.id.status);
         TextView tvDate = (TextView)rowView.findViewById(R.id.statusDate);
-        tv.setText(mLocations.get(mLocations.size() - position -1).getFormattedLocation());
-//        tvDate.setText(mLocations.get(position).getDate());
-        Calendar cal = Calendar.getInstance();
-        cal.setTimeInMillis(Long.parseLong(mLocations.get(mLocations.size() - position -1).getTimeStamp()));
-        String date = (new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z")).format(cal.getTime());
-        tvDate.setText(date);
+        tv.setText(mStatuses.get(mStatuses.size() - position -1).getStatus());
+        tvDate.setText(mStatuses.get(mStatuses.size() - position -1).getDate());
         return rowView;
     }
 }

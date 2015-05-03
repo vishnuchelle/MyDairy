@@ -8,17 +8,17 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
- * Created by Vishnu Chelle on 3/18/2015.
+ * Created by Vishnu Chelle on 5/3/2015.
  */
-public class MyAdapter extends BaseAdapter {
+public class GroupStatusAdapter extends BaseAdapter {
+
 
     private Context mContext;
     private ArrayList<Status> mStatuses;
 
-    public MyAdapter(Context mContext,ArrayList<Status> statuses){
+    public GroupStatusAdapter(Context mContext, ArrayList<Status> statuses){
         this.mContext = mContext;
         this.mStatuses = statuses;
 
@@ -31,7 +31,7 @@ public class MyAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return mStatuses.get(mStatuses.size() - position -1 );
+        return mStatuses.get(position);
     }
 
     @Override
@@ -41,13 +41,15 @@ public class MyAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
         LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.status_row, parent, false);
+        View rowView = inflater.inflate(R.layout.group_status_row, parent, false);
+
         TextView tv = (TextView)rowView.findViewById(R.id.status);
+        TextView pUser = (TextView)rowView.findViewById(R.id.postedUser);
         TextView tvDate = (TextView)rowView.findViewById(R.id.statusDate);
         tv.setText(mStatuses.get(mStatuses.size() - position -1).getStatus());
+        pUser.setText(mStatuses.get(mStatuses.size() - position -1).getUserName());
         tvDate.setText(mStatuses.get(mStatuses.size() - position -1).getDate());
         return rowView;
     }
