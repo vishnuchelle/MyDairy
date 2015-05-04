@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -47,11 +48,12 @@ public class StatusActivity extends ActionBarActivity {
     private ListView mDrawerList;
     private DrawerLayout mDrawerLayout;
     private ArrayAdapter<String> mAdapter;
+    private String[] groupArray;
     private ActionBarDrawerToggle mDrawerToggle;
     private String mActivityTitle;
     final Context mContext = this;
 
-
+    private boolean flag = false;
     private  MySqliteHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,12 +101,78 @@ public class StatusActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                ArrayList<Status> tempStatusList = new ArrayList<Status>();
-
                 if(checkInternetConnection()){
-                    Toast.makeText(StatusActivity.this,"Success Internet connectivity is On...",Toast.LENGTH_SHORT).show();
+
+                    //Show a dialog with list of groups
+                    ListView promptsView = new ListView(mContext);
+                    ArrayAdapter mAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, getGroupsList(groupArray));
+
+                    promptsView.setAdapter(mAdapter);
+
+                    final String status = mStatus.getText() + "";
+
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
+
+                    // set prompts.xml to alertdialog builder
+                    alertDialogBuilder.setView(promptsView);
+
+                    alertDialogBuilder.setTitle("Select a Group to Share!!!");
+
+                    // create alert dialog
+                    final AlertDialog alertDialog = alertDialogBuilder.create();
+
+                    if (!status.equals("")) {
+                        // show it
+                        alertDialog.show();
+                        flag = false;
+                    }else{
+                        Toast.makeText(StatusActivity.this, "Please provide an update!", Toast.LENGTH_SHORT).show();
+                    }
+
+                    promptsView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                            //To add in the local DB and users private status...
+                            Status statusObj = new Status();
+                            DateFormat format = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+                            Calendar calendar = Calendar.getInstance();
+                            String date = format.format(calendar.getTime());
+                            String userName = mUserName;
+
+                            if (!status.equals("")) {
+
+                                if(!flag) {
+                                    flag = true;
+                                    statusObj.setUserName(userName);
+                                    statusObj.setDate(date);
+                                    statusObj.setStatus(status);
+                                    db.addStatus(statusObj);
+                                    updateList();
+                                }
+
+                                String groupName = groupArray[position+1];
+//                                Log.i("Clicked on", groupName);
+                                Toast.makeText(StatusActivity.this, "Shared with "+ groupName, Toast.LENGTH_SHORT).show();
+
+                                //POST Update Status AsyncTask
+                                UpdateGroupStatus uGS = new UpdateGroupStatus();
+                                uGS.execute(groupName,status,date,AppSharedPreference.getCurrentUser(mContext));
+
+                                //Dismiss dialog
+//                                alertDialog.dismiss();
+
+                            } else {
+                                Toast.makeText(StatusActivity.this, "Please provide an update!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
+
+
+//                    Toast.makeText(StatusActivity.this,"Success Internet connectivity is On...",Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(StatusActivity.this,"Please check Internet connectivity...",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(StatusActivity.this,"Update cannot be shared when Internet is off!!!",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -113,7 +181,7 @@ public class StatusActivity extends ActionBarActivity {
         setupDrawer();
         //CheckInternetConnectivity
         if(checkInternetConnection()){
-            //TODO need to call async task
+            //DONE need to call async task
 
             GetGroupsList getGroupsList = new GetGroupsList(new GetGroupsList.IGroupsCallBack() {
                 @Override
@@ -134,6 +202,14 @@ public class StatusActivity extends ActionBarActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+    }
+
+    private String[] getGroupsList(String[] groupArray) {
+        String[] list = new String[groupArray.length-1];
+        for(int i=1;i<groupArray.length;i++){
+            list[i-1] = groupArray[i];
+        }
+        return list;
     }
 
     /**
@@ -184,7 +260,7 @@ public class StatusActivity extends ActionBarActivity {
                 groupList.add(groupsList.getJSONObject(i).getString("groupName"));
             }
 
-        final String[] groupArray = groupList.toArray(new String[groupList.size()]);
+        groupArray = groupList.toArray(new String[groupList.size()]);
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, groupArray);
         mDrawerList.setAdapter(mAdapter);
 
@@ -192,7 +268,7 @@ public class StatusActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(position == 0){
-                    //TODO create new group
+                    //DONE create new group
 
                     // get create_new_group.xml view
                     LayoutInflater li = LayoutInflater.from(mContext);
@@ -239,7 +315,7 @@ public class StatusActivity extends ActionBarActivity {
 
                 }else{
 
-                    //TODO start Activity with group name and user name
+                    //DONE start Activity with group name and user name
                     String groupName = groupArray[position];
 
                     Intent i = new Intent(StatusActivity.this,GroupStatusActivity.class);
