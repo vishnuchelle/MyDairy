@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -19,7 +19,17 @@
             >
 
         </DatePicker>
-    </LinearLayout>
+        <com.example.vishnuchelle.mydairy.DayGraphView
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:id="@+id/day_graph"
+            android:visibility="gone"
+            android:background="#FF7075FF"
+
+            >
+
+        </com.example.vishnuchelle.mydairy.DayGraphView>
+    </RelativeLayout>
 
 
     <Button

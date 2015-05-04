@@ -17,15 +17,16 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bold Text"
+        android:text="BUsername"
+        android:textStyle="bold"
         android:layout_alignParentRight="true"
         android:id="@+id/postedUser"
         />
 
     <TextView
-        android:layout_width="70dp"
+        android:layout_width="80dp"
         android:layout_height="50dp"
-        android:text="Small Text"
+        android:text="Date"
         android:layout_alignParentRight="true"
         android:id="@+id/statusDate"
         android:layout_below="@+id/postedUser"
