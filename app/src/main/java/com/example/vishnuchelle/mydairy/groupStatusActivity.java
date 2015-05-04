@@ -1,13 +1,21 @@
 package com.example.vishnuchelle.mydairy;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.vishnuchelle.mydairy.Status;
 
 import org.apache.http.HttpResponse;
@@ -33,9 +41,11 @@ import java.util.List;
  */
 public class GroupStatusActivity extends ActionBarActivity {
 
-    final Context mContext = this;
+
     private ListView list;
     private TextView groupNameTitle;
+    private ImageView adduser;
+    final Context mContext = this;
 
 
     @Override
@@ -43,12 +53,67 @@ public class GroupStatusActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_status);
         Intent i = getIntent();
-        String groupName = i.getStringExtra("groupName");
+        final String groupName = i.getStringExtra("groupName");
 
         list = (ListView) findViewById(R.id.grStatusListView);
-        groupNameTitle = (TextView) findViewById(R.id.groupNameTitle);
-
+        groupNameTitle = (TextView)findViewById(R.id.groupNameTitle);
+        adduser = (ImageView)findViewById(R.id.addUSer);
         groupNameTitle.setText(groupName);
+
+        adduser.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+                Log.i("Entered On click","enter onlcick");
+
+                // get prompts.xml view
+                LayoutInflater li = LayoutInflater.from(mContext);
+                View addUSerView = li.inflate(R.layout.add_user_dialog, null);
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                        mContext);
+
+                // set prompts.xml to alertdialog builder
+                alertDialogBuilder.setView(addUSerView);
+
+                final EditText dialogInput = (EditText) addUSerView.findViewById(R.id.newUser);
+
+                // set dialog message
+                alertDialogBuilder
+                        .setCancelable(false)
+                        .setPositiveButton("ADD User",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,int id) {
+                                        // get user input and set it to result
+                                        // edit text
+                                        String newUser = dialogInput.getText()+"";
+                                        String toGroupName = groupName;
+
+                                        //Call add users asynctask
+                                        NewUserToGroup nU = new NewUserToGroup();
+                                        nU.execute(toGroupName,newUser);
+
+//                                        Log.i("New User",newUser);
+//                                        Log.i("Into Group",toGroupName);
+                                    }
+                                })
+                        .setNegativeButton("Cancel",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                // create alert dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
+
+                // show it
+                alertDialog.show();
+
+
+            }
+        });
 
         //Get groups status async task
         GetGroupStatus gGS = new GetGroupStatus();
@@ -89,7 +154,7 @@ public class GroupStatusActivity extends ActionBarActivity {
             List<NameValuePair> params = new ArrayList<NameValuePair>();
 
             //prameters to be added to the url
-            params.add(new BasicNameValuePair("q", "{\"groupName\":\"new1\"}"));
+            params.add(new BasicNameValuePair("q", "{\"groupName\":\""+groupName+"\"}"));
             params.add(new BasicNameValuePair("f", "{\"groupStatus\":1}"));
             params.add(new BasicNameValuePair("apiKey", key));
 

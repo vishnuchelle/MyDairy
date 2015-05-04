@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/add_icon"
-            android:id="@+id/addMember"
+            android:id="@+id/addUSer"
             android:layout_alignParentRight="true"
             />
 

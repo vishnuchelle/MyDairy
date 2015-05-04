@@ -39,7 +39,7 @@ public class SignUpActivity extends ActionBarActivity {
                 String pin = ((EditText)findViewById(R.id.pin)).getText()+"";
                 String email = ((EditText)findViewById(R.id.email)).getText()+"";
 
-                //FIXME need to add validations
+                //FIXED need to add validations
 
                 if((!firstName.equals("")) && (!lastName.equals(""))
                         && (!userName.equals("")) && (!(pin.length() == 0))
