@@ -372,8 +372,8 @@ public class MySqliteHelper extends SQLiteOpenHelper {
 
     //Retrieve distance travelled details for specific user and range of dates
 
-    //FIXME Yet to be completed code 05/01
-    //TODO start here with building cursor
+    //DONE Yet to be completed code 05/01
+    //DONE start here with building cursor
 
     public ArrayList<Distance> getDistanceTravelled(String userName, long startTimestamp, long endTimestamp){
         // 1. get reference to readable DB
@@ -391,12 +391,29 @@ public class MySqliteHelper extends SQLiteOpenHelper {
                         null, // g. order by
                         null); // h. limit
 
+        /*Cursor cursor =  // 2. build query
+                db.query(DISTANCE_TABLE, // a. table
+                        null, // b. column names
+                        null, // c. selections
+                        null, // d. selections args
+                        null, // e. group by
+                        null, // f. having
+                        null, // g. order by
+                        null); // h. limit*/
+
+
+
+        Log.i("Size of all cursor",cursor.getCount() +"");
+
         // 3. if we got results get the first one
         ArrayList<Distance> distanceList = new ArrayList<>();
         if (cursor.moveToFirst()) {
             do {
                 Distance distance = new Distance(cursor.getString(0),cursor.getString(1),cursor.getString(2));
-                distanceList.add(distance);
+//                long time = Long.parseLong(cursor.getString(3));
+             //   if(cursor.getString(1).equals(userName) && time >= startTimestamp && time <= endTimestamp) {
+                    distanceList.add(distance);
+               // }
 
             }while (cursor.moveToNext());
         }

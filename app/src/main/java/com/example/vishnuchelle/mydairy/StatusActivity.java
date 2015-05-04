@@ -390,10 +390,15 @@ public class StatusActivity extends ActionBarActivity {
         //noinspection SimplifiableIfStatement
 
          if(id == R.id.action_location_history){
-            //TODO
+            //TODO update layout
             openLocationHistory();
             return true;
-        }
+        }else if(id == R.id.action_dist_graph){
+             openDistanceHistory();
+
+         }
+
+
 
         // Activate the navigation drawer toggle
         if (mDrawerToggle.onOptionsItemSelected(item)) {
@@ -406,6 +411,11 @@ public class StatusActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void openDistanceHistory() {
+        Intent distanceGraphIntent = new Intent(StatusActivity.this,DistanceHistoryActivity.class);
+        startActivity(distanceGraphIntent);
     }
 
     private void openLocationHistory() {

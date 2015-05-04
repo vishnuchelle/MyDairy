@@ -2,6 +2,7 @@ package com.example.vishnuchelle.mydairy;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Created by Vishnu Chelle on 5/2/2015.
  */
-public class LocationHistoryActivity extends Activity {
+public class LocationHistoryActivity extends ActionBarActivity {
 
     private ListView mListView;
 
@@ -23,7 +24,7 @@ public class LocationHistoryActivity extends Activity {
 
         MySqliteHelper dbHelper = new MySqliteHelper(this);
         ArrayList<Location> locationList = dbHelper.getLocations(AppSharedPreference.getCurrentUser(this));
-        ArrayList<Distance> distanceList = dbHelper.getDistanceTravelled(AppSharedPreference.getCurrentUser(this),1430046001000L,1430046009000L);
+//        ArrayList<Distance> distanceList = dbHelper.getDistanceTravelled(AppSharedPreference.getCurrentUser(this),1430046001000L,1430046009000L);
 
         LocationAdapter adapter = new LocationAdapter(this,locationList);
         mListView.setAdapter(adapter);
