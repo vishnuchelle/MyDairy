@@ -93,6 +93,7 @@ public class StatusActivity extends ActionBarActivity {
                     statusObj.setStatus(status);
                     db.addStatus(statusObj);
                     updateList();
+                    mStatus.setText("");
                 }else{
                     Toast.makeText(StatusActivity.this, "Please provide an update!", Toast.LENGTH_SHORT).show();
                 }
@@ -161,6 +162,8 @@ public class StatusActivity extends ActionBarActivity {
                                 //POST Update Status AsyncTask
                                 UpdateGroupStatus uGS = new UpdateGroupStatus();
                                 uGS.execute(groupName, status, date, AppSharedPreference.getCurrentUser(mContext));
+
+                                mStatus.setText("");
 
                                 //Dismiss dialog
 //                                alertDialog.dismiss();
@@ -358,8 +361,9 @@ public class StatusActivity extends ActionBarActivity {
 
                                             PostNewGroup ng = new PostNewGroup();
                                             ng.execute(groupName, AppSharedPreference.getCurrentUser(StatusActivity.this));
+//                                            Toast.makeText(StatusActivity.this,"Successfully created "+groupName+" group",Toast.LENGTH_SHORT);
 
-                                            Log.i("Entered Group Name",groupName);
+//                                            Log.i("Entered Group Name",groupName);
                                         }
                                     })
                             .setNegativeButton("Cancel",

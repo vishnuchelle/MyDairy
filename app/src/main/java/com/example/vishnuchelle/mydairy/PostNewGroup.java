@@ -2,6 +2,7 @@ package com.example.vishnuchelle.mydairy;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -66,8 +67,9 @@ public class PostNewGroup extends AsyncTask<String,Void,Void> {
                 if (resp.getStatusLine().getStatusCode() == 200)
                     result = true;
             }
-            Log.i("Response Code", resp.getStatusLine().getStatusCode() + "");
-            Log.i("SUCCESS","Group SUCCESSFULLY Inserted");
+//            Log.i("Response Code", resp.getStatusLine().getStatusCode() + "");
+//            Log.i("SUCCESS","Group SUCCESSFULLY Inserted");
+
         } catch (Exception e) {
             e.printStackTrace();
             Log.i("Failed", "Group Not Inserted");

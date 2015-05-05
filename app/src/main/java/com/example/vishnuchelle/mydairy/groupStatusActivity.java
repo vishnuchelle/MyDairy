@@ -65,7 +65,7 @@ public class GroupStatusActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                Log.i("Entered On click","enter onlcick");
+//                Log.i("Entered On click","enter onlcick");
 
                 // get prompts.xml view
                 LayoutInflater li = LayoutInflater.from(mContext);
@@ -93,6 +93,8 @@ public class GroupStatusActivity extends ActionBarActivity {
                                         //Call add users asynctask
                                         NewUserToGroup nU = new NewUserToGroup();
                                         nU.execute(toGroupName,newUser);
+
+                                        Toast.makeText(mContext,"Added user "+newUser+" to "+toGroupName,Toast.LENGTH_SHORT);
 
 //                                        Log.i("New User",newUser);
 //                                        Log.i("Into Group",toGroupName);
@@ -178,16 +180,16 @@ public class GroupStatusActivity extends ActionBarActivity {
                 // convert inputstream to string
                 if (inputStream != null) {
                     result = convertInputStreamToString(inputStream);
-                    Log.i("InputStream:", result);
+//                    Log.i("InputStream:", result);
                     return result;
                 } else {
                     result = "Input Stream is null";
-                    Log.i("InputStream:", "Input Stream is null");
+//                    Log.i("InputStream:", "Input Stream is null");
                     return null;
                 }
 
             } catch (Exception e) {
-                Log.i("InputStreamException", e.getLocalizedMessage());
+//                Log.i("InputStreamException", e.getLocalizedMessage());
             }
             return null;
 
