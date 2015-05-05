@@ -20,7 +20,7 @@ public class LocationHistoryActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_history);
-        mListView = (ListView)findViewById(R.id.lst_view);
+        mListView = (ListView)findViewById(R.id.list_view);
 
         MySqliteHelper dbHelper = new MySqliteHelper(this);
         ArrayList<Location> locationList = dbHelper.getLocations(AppSharedPreference.getCurrentUser(this));

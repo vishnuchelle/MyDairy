@@ -15,4 +15,11 @@
         android:title="@string/action_dist_graph"
         android:orderInCategory="100"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/yelp_info"
+        android:title="@string/yelp_api"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        />
 </menu>

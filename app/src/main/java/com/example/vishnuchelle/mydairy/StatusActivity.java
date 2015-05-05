@@ -390,15 +390,16 @@ public class StatusActivity extends ActionBarActivity {
         //noinspection SimplifiableIfStatement
 
          if(id == R.id.action_location_history){
-            //TODO update layout
+            //DONE update layout
             openLocationHistory();
             return true;
         }else if(id == R.id.action_dist_graph){
              openDistanceHistory();
 
+         }else if(id == R.id.yelp_info){
+             openYelpSuggestions();
+
          }
-
-
 
         // Activate the navigation drawer toggle
         if (mDrawerToggle.onOptionsItemSelected(item)) {
@@ -411,6 +412,11 @@ public class StatusActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void openYelpSuggestions() {
+        Intent yelpI = new Intent(StatusActivity.this,YelpActivity.class);
+        startActivity(yelpI);
     }
 
     private void openDistanceHistory() {

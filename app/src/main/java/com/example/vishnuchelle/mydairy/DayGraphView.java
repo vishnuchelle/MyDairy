@@ -205,7 +205,7 @@ public class DayGraphView extends RelativeLayout implements GestureDetector.OnGe
         return dp * context.getResources().getDisplayMetrics().density;
     }
 
-
+    //not being used in current UI
     private String getDay(int i){
         switch(i){
             case 0:
@@ -244,32 +244,32 @@ public class DayGraphView extends RelativeLayout implements GestureDetector.OnGe
     }
 
 
-    public void setDailyGoal(int goal){
-        this.goal = goal;
+//    public void setDailyGoal(int goal){
+//        this.goal = goal;
+//
+//        max = getMax(dayValues,goal);
+//        //        max = max > goal ? max : goal;
+//        invalidate();
+//    }
 
-        max = getMax(dayValues,goal);
-        //        max = max > goal ? max : goal;
-        invalidate();
-    }
 
+//    public void setCurrentDay(int day){
+//        currentDay = day;
+//
+//        invalidate();
+//    }
 
-    public void setCurrentDay(int day){
-        currentDay = day;
-
-        invalidate();
-    }
-
-    public void setNextDay(){
-        currentDay = currentDay + 1;
-        if(currentDay == 7){
-            currentDay = 0;
-        }
-        invalidate();
-    }
+//    public void setNextDay(){
+//        currentDay = currentDay + 1;
+//        if(currentDay == 7){
+//            currentDay = 0;
+//        }
+//        invalidate();
+//    }
 
     @Override
     public boolean onSingleTapConfirmed(MotionEvent e) {
-       
+
         return false;
     }
 

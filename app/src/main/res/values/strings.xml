@@ -7,4 +7,5 @@
     <string name="action_dist_graph">Distance Graph</string>
     <string name="drawer_open">Groups</string>
     <string name="drawer_close">Close</string>
+    <string name="yelp_api">Yelp</string>
 </resources>

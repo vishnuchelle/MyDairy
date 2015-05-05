@@ -36,6 +36,11 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
         signIn.setOnClickListener(this);
         signUp.setOnClickListener(this);
 
+        //Alarm manager for Location Tracking. Daily four times.
+        locationTrackAlarm();
+        //Alarm manager for Distance calculator. Daily once.
+        distanceCalcAlarm();
+
     }
 
     @Override
