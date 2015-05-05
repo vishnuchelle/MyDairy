@@ -31,8 +31,8 @@ public class GetGroupsList extends AsyncTask<String, Void, String> {
     //http get request to retrive data from the server.
     public String httpGetRetrieve(String userName){
         String key = "hmmOXhHsA3Kp1f8HdZApSdh98JVvPLfP";
-        String database = "diarytest";
-        String collection = "testcollection";
+        String database = "diarydatabase";
+        String collection = "groups";
 
 //        String url = "https://api.mongolab.com/api/1/databases/diarytest/collections/testcollection?q={%22use_id%22:%22chelle%22}&f={%22email%22:1}&apiKey=hmmOXhHsA3Kp1f8HdZApSdh98JVvPLfP";
 //        https://api.mongolab.com/api/1/databases/diarytest/collections/testcollection?q={%22use_id%22:%22chelle%22}&f={%22email%22:1}&apiKey=hmmOXhHsA3Kp1f8HdZApSdh98JVvPLfP

@@ -42,19 +42,28 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mark It"
+                android:text="Mark"
                 android:textStyle="italic"
+                android:layout_marginLeft="20dp"
                 android:id="@+id/makeUpdate"
                 />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Share It"
+                android:text="Share"
                 android:textStyle="italic"
                 android:layout_marginLeft="10dp"
                 android:id="@+id/shareUpdate"
                 />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quick"
+                android:textStyle="italic"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/quickUpdate"/>
+
         </LinearLayout>
 
     </LinearLayout>

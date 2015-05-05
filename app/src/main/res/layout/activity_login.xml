@@ -96,7 +96,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:text="vishnu666"
+            android:text="vishnu"
             android:hint="UserName"
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"

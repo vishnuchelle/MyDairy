@@ -41,6 +41,7 @@ public class StatusActivity extends ActionBarActivity {
     private EditText mStatus;
     private Button mUpdate;
     private Button sUpdate;
+    private Button qUpdate;
     private ListView list;
 
 
@@ -49,6 +50,7 @@ public class StatusActivity extends ActionBarActivity {
     private DrawerLayout mDrawerLayout;
     private ArrayAdapter<String> mAdapter;
     private String[] groupArray;
+    private String[] template;
     private ActionBarDrawerToggle mDrawerToggle;
     private String mActivityTitle;
     final Context mContext = this;
@@ -63,6 +65,7 @@ public class StatusActivity extends ActionBarActivity {
         mStatus = (EditText)findViewById(R.id.status);
         mUpdate = (Button)findViewById(R.id.makeUpdate);
         sUpdate = (Button)findViewById(R.id.shareUpdate);
+        qUpdate = (Button)findViewById(R.id.quickUpdate);
         list = (ListView)findViewById(R.id.listView);
 
         mDrawerList = (ListView)findViewById(R.id.navList);
@@ -142,7 +145,7 @@ public class StatusActivity extends ActionBarActivity {
 
                             if (!status.equals("")) {
 
-                                if(!flag) {
+                                if (!flag) {
                                     flag = true;
                                     statusObj.setUserName(userName);
                                     statusObj.setDate(date);
@@ -151,13 +154,13 @@ public class StatusActivity extends ActionBarActivity {
                                     updateList();
                                 }
 
-                                String groupName = groupArray[position+1];
+                                String groupName = groupArray[position + 1];
 //                                Log.i("Clicked on", groupName);
-                                Toast.makeText(StatusActivity.this, "Shared with "+ groupName, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(StatusActivity.this, "Shared with " + groupName, Toast.LENGTH_SHORT).show();
 
                                 //POST Update Status AsyncTask
                                 UpdateGroupStatus uGS = new UpdateGroupStatus();
-                                uGS.execute(groupName,status,date,AppSharedPreference.getCurrentUser(mContext));
+                                uGS.execute(groupName, status, date, AppSharedPreference.getCurrentUser(mContext));
 
                                 //Dismiss dialog
 //                                alertDialog.dismiss();
@@ -174,6 +177,45 @@ public class StatusActivity extends ActionBarActivity {
                 }else{
                     Toast.makeText(StatusActivity.this,"Update cannot be shared when Internet is off!!!",Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        qUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final ListView promptsView = new ListView(mContext);
+                ArrayAdapter mAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, getTemplateStatus());
+
+                promptsView.setAdapter(mAdapter);
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
+
+                // set prompts.xml to alertdialog builder
+                alertDialogBuilder.setView(promptsView);
+
+                alertDialogBuilder.setTitle("Select an update. Quick!!!");
+
+                // create alert dialog
+                final AlertDialog alertDialog = alertDialogBuilder.create();
+                // show it
+                alertDialog.show();
+
+                        promptsView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                                String selectedTemplate = promptsView.getItemAtPosition(position)+"";
+
+//                                Log.i("Selected Template",selectedTemplate);
+                                mStatus.setText(selectedTemplate);
+
+                                alertDialog.dismiss();
+
+                    }
+                });
+
+
             }
         });
 
@@ -210,6 +252,29 @@ public class StatusActivity extends ActionBarActivity {
             list[i-1] = groupArray[i];
         }
         return list;
+    }
+
+    //Templates for quick updates
+    private String[] getTemplateStatus(){
+        String[] templateList = {
+                "Just awake!",
+                "Just had breakfast.",
+                "Just had lunch",
+                "Reached office",
+                "Fun time! Playing Baseball.",
+                "Time to sleep",
+                "Meeting with my boss",
+                "Long drive!",
+                "Shopping!!!",
+                "Had Dinner",
+                "Back at home!",
+                "Party time!!!",
+                "Headache :(",
+                "Boozing!!!"
+        };
+
+        return templateList;
+
     }
 
     /**

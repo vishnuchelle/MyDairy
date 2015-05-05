@@ -31,7 +31,7 @@ public class LocationHistoryActivity extends ActionBarActivity {
 
     }
 
-    //insert location details
+    //TEST insert location details to TEST
     public void insertValues(View v){
 
         MySqliteHelper dbHelper = new MySqliteHelper(this);
@@ -347,7 +347,7 @@ public class LocationHistoryActivity extends ActionBarActivity {
     }
 
 
-    //Update Distance details
+    //TEST Update Distance details
     public void insertValuesDistance(View v){
 
          MySqliteHelper dbHelper = new MySqliteHelper(this);

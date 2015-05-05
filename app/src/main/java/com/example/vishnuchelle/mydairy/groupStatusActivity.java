@@ -141,8 +141,8 @@ public class GroupStatusActivity extends ActionBarActivity {
         //Get groups list from Mongo lab
         public String getGroupStatus(String groupName) {
             String key = "hmmOXhHsA3Kp1f8HdZApSdh98JVvPLfP";
-            String database = "diarytest";
-            String collection = "testcollection";
+            String database = "diarydatabase";
+            String collection = "groups";
 //        String url = "https://api.mongolab.com/api/1/databases/diarytest/collections/testcollection?q={%22use_id%22:%22chelle%22}&f={%22email%22:1}&apiKey=hmmOXhHsA3Kp1f8HdZApSdh98JVvPLfP";
 //        https://api.mongolab.com/api/1/databases/diarytest/collections/testcollection?q={%22use_id%22:%22chelle%22}&f={%22email%22:1}&apiKey=hmmOXhHsA3Kp1f8HdZApSdh98JVvPLfP
 

@@ -22,8 +22,8 @@ public class PostNewGroup extends AsyncTask<String,Void,Void> {
         HttpClient hc = new DefaultHttpClient();
         String message;
         String key = "hmmOXhHsA3Kp1f8HdZApSdh98JVvPLfP";
-        String database = "diarytest";
-        String collection = "testcollection";
+        String database = "diarydatabase";
+        String collection = "groups";
 
 
         String url = "https://api.mongolab.com/api/1/databases/" +
