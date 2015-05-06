@@ -4,6 +4,8 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
@@ -69,11 +71,38 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
                 }
                 break;
             case R.id.sign_up:
-                Intent intent = new Intent(LoginActivity.this,SignUpActivity.class);
-                startActivity(intent);
-                finish();
-                break;
+                if (checkInternetConnection()){
+                    Intent intent = new Intent(LoginActivity.this,SignUpActivity.class);
+                    startActivity(intent);
+                    finish();
+                    break;
+                }else{
+                    Toast.makeText(LoginActivity.this,"New user can't be registered if Internet is off!",Toast.LENGTH_SHORT).show();
+                }
         }
+    }
+
+    //Checking Internet connectivity
+    public boolean checkInternetConnection() {
+        ConnectivityManager cm = (ConnectivityManager) getApplicationContext().getSystemService(
+                Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo wifiNetwork = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        if (wifiNetwork != null && wifiNetwork.isConnected()) {
+            return true;
+        }
+
+        NetworkInfo mobileNetwork = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        if (mobileNetwork != null && mobileNetwork.isConnected()) {
+            return true;
+        }
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        if (activeNetwork != null && activeNetwork.isConnected()) {
+            return true;
+        }
+
+        return false;
     }
 
     //Alarm manager for Location tracker

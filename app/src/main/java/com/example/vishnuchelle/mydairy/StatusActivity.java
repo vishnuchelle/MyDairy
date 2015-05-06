@@ -360,7 +360,7 @@ public class StatusActivity extends ActionBarActivity {
                                             String groupName = dialogInput.getText()+"";
 
                                             PostNewGroup ng = new PostNewGroup();
-                                            ng.execute(groupName, AppSharedPreference.getCurrentUser(StatusActivity.this));
+                                            ng.execute(groupName, mUserName);
 //                                            Toast.makeText(StatusActivity.this,"Successfully created "+groupName+" group",Toast.LENGTH_SHORT);
 
 //                                            Log.i("Entered Group Name",groupName);
